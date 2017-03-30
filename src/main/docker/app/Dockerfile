@@ -27,6 +27,7 @@ ENV         PROFILES       dev
 
 ENV         JAVA_OPTS      -Djava.net.preferIPv4Stack=true \
                            -Djava.awt.headless=true \
+                           -Djava.security.egd=file:/dev/./urandom \
                            -Xms128M \
                            -Xmx1G \
                            -XX:MetaspaceSize=128M \

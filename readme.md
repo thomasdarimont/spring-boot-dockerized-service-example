@@ -5,7 +5,12 @@ mvn clean package -DskipTests docker:build
 
 # Run docker image
 ```
-docker run -it --rm --name demo-service -e REMOTE_DEBUG=1 -p 8080:8080 de.tdlabs/demo-service
+docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
+```
+
+# Run docker image with remote debugging enabled
+```
+docker run -it --rm --name demo-service -e REMOTE_DEBUG=1 -p 8080:8080 -p 8787:8787 de.tdlabs/demo-service
 ```
 
 # Show Docker Image Metadata

@@ -37,6 +37,7 @@ build:
 
 deploy_test:
   stage: deploy
+  image: ubuntu:16.04
   services:
     - docker:dind
   before_script:
@@ -67,7 +68,7 @@ deploy_test:
     - ssh test docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
   environment:
     name: test
-    url: http://test
+    url: http://test:8080/
   only:
   - master
 

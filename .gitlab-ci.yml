@@ -1,5 +1,3 @@
-image: gitlab/dind
-
 services:
   - docker:dind
 

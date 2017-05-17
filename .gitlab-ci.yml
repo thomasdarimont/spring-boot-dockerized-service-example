@@ -20,3 +20,14 @@ deploy_test:
     url: http://test
   only:
   - master
+
+deploy_prod:
+  stage: deploy
+  script:
+    - echo "Deploy to production server"
+  environment:
+    name: prod
+    url: http://prod
+  when: manual
+  only:
+  - master

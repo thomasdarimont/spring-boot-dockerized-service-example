@@ -37,8 +37,12 @@ build:
 
 deploy_test:
   stage: deploy
+  services:
+    - docker:dind
   script:
-    - echo "Deploy to test server"
+    - docker save de.tdlabs/demo-service:latest | ssh test docker load
+    - ssh test docker rm demo-service
+    - ssh test docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
   environment:
     name: test
     url: http://test

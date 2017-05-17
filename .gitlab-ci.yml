@@ -1,3 +1,7 @@
+image: docker:git
+services:
+  - docker:dind
+
 cache:
   paths:
     - .m2/repository

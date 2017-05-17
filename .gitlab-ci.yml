@@ -11,7 +11,6 @@ variables:
   # `installAtEnd` and `deployAtEnd`are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
-
 stages:
   - test
   - build
@@ -25,6 +24,8 @@ test:
 build:
   stage: build
   image: maven:3-jdk-8
+  services:
+  - docker:dind
   script: "mvn $MAVEN_CLI_OPTS package docker:build -DskipTests"
   artifacts:
     paths:

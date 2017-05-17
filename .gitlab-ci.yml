@@ -15,6 +15,8 @@ variables:
   # `installAtEnd` and `deployAtEnd`are only effective with recent version of the corresponding plugins.
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
 
+  SSH_OPTS: "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
 stages:
   - test
   - build
@@ -39,16 +41,10 @@ deploy_test:
   stage: deploy
   services:
     - docker:dind
-  before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
   script:
-    - docker save de.tdlabs/demo-service:latest | ssh test docker load
-    - ssh test docker rm demo-service
-    - ssh test docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
+    - docker save de.tdlabs/demo-service:latest | ssh $SSH_OPTS test docker load
+    - ssh $SSH_OPTS test docker rm demo-service
+    - ssh $SSH_OPTS test docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
   environment:
     name: test
     url: http://test

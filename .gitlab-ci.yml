@@ -38,6 +38,7 @@ build:
 
 deploy_test:
   stage: deploy
+  image: phusion/baseimage:0.9.22
   services:
     - docker:dind
   before_script:

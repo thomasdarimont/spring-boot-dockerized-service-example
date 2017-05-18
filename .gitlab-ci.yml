@@ -61,10 +61,10 @@ deploy_test:
     - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   script:
-    - echo "Deploy to PROD environment"
+    - echo "Deploy to TEST environment"
     - ssh vagrant@test "docker stop demo-service || true && docker rm  demo-service || true"
     - ssh vagrant@test "docker pull gitlab:5000/demo-service"
-    - ssh vagrant@test docker run -d --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
+    - ssh vagrant@test docker run -d --rm --name demo-service -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test
     url: http://test:8080/
@@ -94,7 +94,7 @@ deploy_prod:
     - echo "Deploy to PROD environment"
     - ssh vagrant@prod "docker stop demo-service || true && docker rm  demo-service || true"
     - ssh vagrant@prod "docker pull gitlab:5000/demo-service"
-    - ssh vagrant@prod docker run -d --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
+    - ssh vagrant@prod docker run -d --rm --name demo-service -e SPRING_PROFILES_ACTIVE=prod -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test
     url: http://prod:8080/

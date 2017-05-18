@@ -48,16 +48,15 @@ deploy_test:
     - eval $(ssh-agent -s)
 
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - echo $SSH_PRIVATE_KEY
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
 
     # In order to properly check the server's host key, assuming you created the
     # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
     # instead.
-    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
+#    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
-    - echo "$SSH_PRIVATE_KEY" >  ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/*
+#    - echo "$SSH_PRIVATE_KEY" >  ~/.ssh/id_rsa
+#    - chmod 600 ~/.ssh/*
   script:
     - ssh vagrant@test "docker stop demo-service || true && docker rm  demo-service || true"
     - ssh vagrant@test docker run -d --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service

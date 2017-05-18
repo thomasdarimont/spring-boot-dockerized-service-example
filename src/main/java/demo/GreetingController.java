@@ -19,7 +19,7 @@ class GreetingController {
   @GetMapping("/")
   Object greet(@RequestParam(defaultValue = "World") String name) {
     Map<String, Object> m = new LinkedHashMap<>();
-    m.put("greeting", "Hello " + name);
+    m.put("greeting", "Hi " + name);
     m.put("time", LocalDateTime.now());
     m.put("commit", gitProperties.getShortCommitId());
     m.put("commitTime", gitProperties.getCommitTime());

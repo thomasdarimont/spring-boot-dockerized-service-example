@@ -23,6 +23,7 @@ class GreetingController {
     m.put("time", LocalDateTime.now());
     m.put("commit", gitProperties.getShortCommitId());
     m.put("commitTime", gitProperties.getCommitTime());
+    m.put("commitMessage", gitProperties.get("commit.message.short"));
     return m;
   }
 }

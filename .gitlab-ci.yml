@@ -59,6 +59,7 @@ deploy_test:
 #    - chmod 600 ~/.ssh/*
   script:
     - ssh vagrant@test "docker stop demo-service || true && docker rm  demo-service || true"
+    - ssh vagrant@test "docker pull gitlab:5000/demo-service"
     - ssh vagrant@test docker run -d --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test

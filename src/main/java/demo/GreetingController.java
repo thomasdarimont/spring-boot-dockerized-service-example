@@ -1,6 +1,7 @@
 package demo;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ class GreetingController {
 
   private final GitProperties gitProperties;
 
+  private final BuildProperties buildProperties;
+
   @GetMapping("/")
   Object greet(@RequestParam(defaultValue = "World") String name) {
     Map<String, Object> m = new LinkedHashMap<>();
@@ -29,6 +32,7 @@ class GreetingController {
     m.put("commitTime", gitProperties.getCommitTime());
     m.put("commitMessage", gitProperties.get("commit.message.short"));
     m.put("active_profiles", Arrays.toString(env.getActiveProfiles()));
+    m.put("version", buildProperties.getVersion());
     return m;
   }
 }

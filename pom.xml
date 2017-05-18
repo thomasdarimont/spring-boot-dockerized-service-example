@@ -99,6 +99,7 @@
             <version>${docker-maven-plugin.version}</version>
             <configuration>
                <verbose>${docker-debug}</verbose>
+               <registry>gitlab:5000</registry>
                <images>
                   <image>
                      <name>${project.groupId}/${project.artifactId}</name>
@@ -109,6 +110,7 @@
                            <VENDOR_NAME>tdlabs</VENDOR_NAME>
                            <VENDOR_URL>https://github.com/thomasdarimont</VENDOR_URL>
                            <DESCRIPTION>${project.description}</DESCRIPTION>
+
                            <BUILD_DATE>${git.build.time}</BUILD_DATE>
                            <BUILD_HOST>${git.build.host}</BUILD_HOST>
                            <VCS_URL>https://github.com/thomasdarimont/demo-service</VCS_URL>

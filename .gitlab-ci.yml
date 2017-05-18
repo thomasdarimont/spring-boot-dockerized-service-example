@@ -31,7 +31,7 @@ build:
   image: maven:3-jdk-8
   services:
   - docker:dind
-  script: "mvn $MAVEN_CLI_OPTS package docker:build -DskipTests"
+  script: "mvn $MAVEN_CLI_OPTS package docker:build docker:push -DskipTests"
   artifacts:
     paths:
       - target/*.jar
@@ -64,9 +64,7 @@ deploy_test:
     # - mkdir -p ~/.ssh
     # - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   script:
-    - docker save de.tdlabs/demo-service:latest | ssh test docker load
-    - ssh test docker rm demo-service
-    - ssh test docker run -it --rm --name demo-service -p 8080:8080 de.tdlabs/demo-service
+    - ssh test docker run -it --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test
     url: http://test:8080/

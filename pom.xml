@@ -99,10 +99,9 @@
             <version>${docker-maven-plugin.version}</version>
             <configuration>
                <verbose>${docker-debug}</verbose>
-               <registry>gitlab:5000</registry>
                <images>
                   <image>
-                     <name>${project.groupId}/${project.artifactId}</name>
+                     <name>gitlab:5000/${project.artifactId}</name>
                      <build>
                         <args>
                            <APP_NAME>${project.name}</APP_NAME>

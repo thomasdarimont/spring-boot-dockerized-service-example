@@ -53,7 +53,7 @@ deploy_test:
     # In order to properly check the server's host key, assuming you created the
     # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
     # instead.
-#    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
+    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
 #    - echo "$SSH_PRIVATE_KEY" >  ~/.ssh/id_rsa
 #    - chmod 600 ~/.ssh/*

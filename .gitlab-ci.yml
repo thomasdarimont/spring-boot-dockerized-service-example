@@ -56,7 +56,7 @@ deploy_test:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   script:
-    - ssh test docker run -it --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
+    - ssh -vvvv test docker run -it --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test
     url: http://test:8080/

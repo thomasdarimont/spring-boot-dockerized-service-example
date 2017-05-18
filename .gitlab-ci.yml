@@ -38,11 +38,11 @@ build:
 
 deploy_test:
   stage: deploy
-  image: iadknet/ssh-client-light
+  image: maven:3-jdk-8
   before_script:
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)
-#    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
 
     # Run ssh-agent (inside the build environment)
     - eval $(ssh-agent -s)
@@ -54,12 +54,12 @@ deploy_test:
     # In order to properly check the server's host key, assuming you created the
     # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
     # instead.
-    - mkdir -p ~/.ssh
+    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
     - echo "$SSH_PRIVATE_KEY" >  ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/*
   script:
-    - ssh -o PreferredAuthentications=publickey -vvvv test docker run -it --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
+    - ssh -o PreferredAuthentications=publickey -vvv vagrant@test docker run -it --rm --name demo-service -p 8080:8080 gitlab:5000/demo-service
   environment:
     name: test
     url: http://test:8080/

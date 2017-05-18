@@ -48,7 +48,7 @@ deploy_test:
     - eval $(ssh-agent -s)
 
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    - ssh-add <(echo "$SSH_PRIVATE_KEY_TEST")
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 --decode)
 
     # In order to properly check the server's host key, assuming you created the
     # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines

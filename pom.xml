@@ -26,10 +26,8 @@
         <docker-debug>false</docker-debug>
         <docker-maven-plugin.version>0.20.1</docker-maven-plugin.version>
 
-        <properties>
-            <!-- Sane default when no revision property is passed in from the commandline -->
-            <revision>0-SNAPSHOT</revision>
-        </properties>
+        <!-- Sane default when no revision property is passed in from the commandline -->
+        <revision>0-SNAPSHOT</revision>
     </properties>
 
     <scm>

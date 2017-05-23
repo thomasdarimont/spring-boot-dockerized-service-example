@@ -41,6 +41,11 @@ build:
     paths:
       - target/*.jar
 
+deploy:
+  stage: deploy
+  image: maven:3-jdk-8
+  script: "mvn deploy scm:tag -Drevision=$CI_JOB_ID -DskipTests"
+
 deploy_test:
   stage: deploy
   image: maven:3-jdk-8

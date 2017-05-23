@@ -5,7 +5,7 @@
 
     <groupId>de.tdlabs</groupId>
     <artifactId>demo-service</artifactId>
-    <version>0.0.19.${revision}</version>
+    <version>0.0.20.${revision}</version>
     <packaging>jar</packaging>
 
     <name>demo-service</name>

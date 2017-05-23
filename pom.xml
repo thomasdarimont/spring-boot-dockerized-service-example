@@ -31,7 +31,7 @@
     </properties>
 
     <scm>
-        <connection>git@gitlab:tdlabs/spring-boot-dockerized-service-example.git</connection>
+        <connection>http://gitlab/tdlabs/spring-boot-dockerized-service-example</connection>
     </scm>
 
     <distributionManagement>

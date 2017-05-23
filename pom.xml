@@ -37,7 +37,7 @@
     <distributionManagement>
         <repository>
             <id>artifact-repository</id>
-            <url>http://gitlab:8081</url>
+            <url>http://gitlab:8081/repository/tdlabs-repository/</url>
         </repository>
     </distributionManagement>
 

@@ -31,8 +31,8 @@
     </properties>
 
     <scm>
-        <connection>ssh://git@gitlab/tdlabs/spring-boot-dockerized-service-example.git</connection>
-        <developerConnection>ssh://git@gitlab/tdlabs/spring-boot-dockerized-service-example.git</developerConnection>
+        <connection>scm:git:git@gitlab|tdlabs/spring-boot-dockerized-service-example.git</connection>
+        <developerConnection>scm:git:git@gitlab|tdlabs/spring-boot-dockerized-service-example.git</developerConnection>
         <url>http://gitlab/tdlabs/spring-boot-dockerized-service-example</url>
     </scm>
 

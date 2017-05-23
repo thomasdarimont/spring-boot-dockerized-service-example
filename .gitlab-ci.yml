@@ -39,6 +39,8 @@ deploy:
   stage: deploy
   image: maven:3-jdk-8
   before_script:
+    - 'git config --global user.email "deployment@localhost"'
+    - 'git config --global user.name "Deploy Bot"'
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'

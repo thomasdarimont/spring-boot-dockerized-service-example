@@ -57,7 +57,6 @@ deploy:
                 </server>
                </servers>
              </settings>" > $HOME/.m2/settings.xml
-    - "cat $HOME/.m2/settings.xml"
     - "mvn $MAVEN_CLI_OPTS deploy scm:tag -Drevision=$CI_JOB_ID -DskipTests"
 
 deploy_test:

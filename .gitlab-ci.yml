@@ -61,6 +61,8 @@ deploy:test:
   environment:
     name: test
     url: http://test:8080/
+  dependencies:
+  - build:maven
   only:
   - master
 
@@ -91,7 +93,7 @@ deploy:prod:
     name: test
     url: http://prod:8080/
   dependencies:
-  - deploy:test
+  - build:maven
   when: manual
   only:
   - master

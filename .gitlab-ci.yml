@@ -25,7 +25,7 @@ stages:
   - build
   - deploy
 
-build:
+build:maven:
   stage: build
   image: maven:3-jdk-8
   services:
@@ -35,7 +35,7 @@ build:
     paths:
       - target/*.jar
 
-deploy_test:
+deploy:test:
   stage: deploy
   image: maven:3-jdk-8
   before_script:
@@ -57,7 +57,6 @@ deploy_test:
   script:
     - echo "Deploy to TEST environment"
     - ssh vagrant@test "docker stop demo-service || true && docker rm  demo-service || true"
-#    - ssh vagrant@test "docker pull gitlab:5000/demo-service:$CI_COMMIT_SHA"
     - ssh vagrant@test docker run -d --rm --name demo-service -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 gitlab:5000/demo-service:$CI_COMMIT_SHA
   environment:
     name: test
@@ -65,7 +64,7 @@ deploy_test:
   only:
   - master
 
-deploy_prod:
+deploy:prod:
   stage: deploy
   image: maven:3-jdk-8
   before_script:
@@ -87,11 +86,12 @@ deploy_prod:
   script:
     - echo "Deploy to PROD environment"
     - ssh vagrant@prod "docker stop demo-service || true && docker rm  demo-service || true"
-    - ssh vagrant@prod "docker pull gitlab:5000/demo-service:$CI_COMMIT_SHA"
     - ssh vagrant@prod docker run -d --rm --name demo-service -e SPRING_PROFILES_ACTIVE=prod -p 8080:8080 gitlab:5000/demo-service:$CI_COMMIT_SHA
   environment:
     name: test
     url: http://prod:8080/
+  depenencies:
+  - deploy:test
   when: manual
   only:
   - master

@@ -90,7 +90,7 @@ deploy:prod:
   environment:
     name: test
     url: http://prod:8080/
-  depenencies:
+  dependencies:
   - deploy:test
   when: manual
   only:

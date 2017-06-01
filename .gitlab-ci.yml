@@ -35,45 +35,6 @@ build:
     paths:
       - target/*.jar
 
-#deploy:
-#  stage: deploy
-#  image: maven:3-jdk-8
-#  before_script:
-#    - 'git config --global user.email "deployment@localhost"'
-#    - 'git config --global user.name "Deploy Bot"'
-#    # Install ssh-agent if not already installed, it is required by Docker.
-#    # (change apt-get to yum if you use a CentOS-based image)
-#    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-#
-#    # Run ssh-agent (inside the build environment)
-#    - eval $(ssh-agent -s)
-#
-#    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#
-#    # Add the SSH key for deployment user
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY_DEPLOYMENT")
-
-#    # In order to properly check the server's host key, assuming you created the
-#    # SSH_SERVER_HOSTKEYS variable previously, uncomment the following two lines
-#    # instead.
-#    - 'mkdir -p ~/.ssh && chmod 700 ~/.ssh'
-#    - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
-#  script:
-#    - echo "<settings xmlns=\"http://maven.apache.org/SETTINGS/1.0.0\"
-#                       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
-#                       xsi:schemaLocation=\"http://maven.apache.org/SETTINGS/1.0.0
-#                               https://maven.apache.org/xsd/settings-1.0.0.xsd\">
-#            <servers>
-#               <server>
-#                  <id>nexus</id>
-#                  <username>$MAVEN_DEPLOY_USER</username>
-#                  <password>$MAVEN_DEPLOY_PASSWORD</password>
-#                </server>
-#               </servers>
-#             </settings>" > $HOME/.m2/settings.xml
-#    - "mvn $MAVEN_CLI_OPTS deploy scm:tag -Drevision=$CI_JOB_ID -DskipTests"
-
 deploy_test:
   stage: deploy
   image: maven:3-jdk-8

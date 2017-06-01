@@ -57,7 +57,7 @@ deploy_test:
   script:
     - echo "Deploy to TEST environment"
     - ssh vagrant@test "docker stop demo-service || true && docker rm  demo-service || true"
-    - ssh vagrant@test "docker pull gitlab:5000/demo-service:$CI_COMMIT_SHA"
+#    - ssh vagrant@test "docker pull gitlab:5000/demo-service:$CI_COMMIT_SHA"
     - ssh vagrant@test docker run -d --rm --name demo-service -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 gitlab:5000/demo-service:$CI_COMMIT_SHA
   environment:
     name: test

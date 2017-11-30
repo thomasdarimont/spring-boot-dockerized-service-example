@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,7 +24,7 @@
         <java.version>1.8</java.version>
 
         <docker-debug>false</docker-debug>
-        <docker-maven-plugin.version>0.20.1</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.23.0</docker-maven-plugin.version>
 
         <!-- Sane default when no revision property is passed in from the commandline -->
         <revision>0-SNAPSHOT</revision>
@@ -143,7 +143,6 @@
                                 <tags>
                                     <tag>${project.version}</tag>
                                     <tag>${git.commit.id}</tag>
-                                    <tag>latest</tag>
                                 </tags>
                                 <dockerFileDir>app</dockerFileDir>
                                 <assembly>

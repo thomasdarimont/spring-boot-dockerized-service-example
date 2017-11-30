@@ -145,7 +145,7 @@
                                     <tag>${project.version}</tag>
                                     <tag>${git.commit.id}</tag>
                                 </tags>
-                                <dockerFileDir>app</dockerFileDir>
+                                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
                                 <assembly>
                                     <inline>
                                         <files>

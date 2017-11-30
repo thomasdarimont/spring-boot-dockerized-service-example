@@ -1,4 +1,4 @@
-FROM        openjdk:8u151-jre-slim
+FROM        openjdk:8u151-jre
 MAINTAINER  Thomas Darimont <t.darimont@gmail.com>
 
 ARG   BUILD_DATE
@@ -31,7 +31,9 @@ ENV         JAVA_OPTS      -Djava.net.preferIPv4Stack=true \
                            -Xms128M \
                            -Xmx1G \
                            -XX:MetaspaceSize=128M \
-                           -XX:MaxMetaspaceSize=256m
+                           -XX:MaxMetaspaceSize=256M \
+                           -XX:+UnlockExperimentalVMOptions \
+                           -XX:+UseCGroupMemoryLimitForHeap
 
 ENV         APP_NAME       $APP_NAME
 
@@ -44,20 +46,23 @@ EXPOSE      8080 8787
 
 RUN         mkdir -p /app
 
-ADD         entry-point.sh maven/*.jar /app/
+ADD         entry-point.sh /app/
+ADD         maven/*.jar /app/
 
-# USER root
+USER root
 
-#RUN         apk -U add tzdata \
-#            && cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-#            && chmod +x /app/entry-point.sh
+RUN          chmod +x /app/entry-point.sh \
+             && echo "Europe/Berlin" > /etc/timezone
 
-#RUN         addgroup -S appgrp -g 1000 \
-#            && adduser -S -g appgrp app \
-#            && chown -R app /app \
-#            && chmod -R "g+rwX" /app \
-#            && chown -R app:appgrp /app
+RUN          adduser --system \
+                     --no-create-home \
+                     --disabled-password \
+                     --disabled-login \
+                     --shell /bin/false \
+                     app \
+             && chown -R app /app \
+             && chmod -R "g+rwX" /app
 
-#USER app
+USER app
 
 CMD         ["sh","/app/entry-point.sh"]

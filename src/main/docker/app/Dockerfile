@@ -1,4 +1,4 @@
-FROM        anapsix/alpine-java:8u121b13_server-jre_unlimited
+FROM        openjdk:8u151-jre-slim
 MAINTAINER  Thomas Darimont <t.darimont@gmail.com>
 
 ARG   BUILD_DATE

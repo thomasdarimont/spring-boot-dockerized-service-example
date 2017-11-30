@@ -1,8 +1,5 @@
 image: docker:latest
 
-services:
-  - docker:dind
-
 cache:
   paths:
     - .m2/repository
@@ -29,8 +26,6 @@ stages:
 build:maven:
   stage: build
   image: maven:3-jdk-8
-  services:
-  - docker:dind
   script: "mvn $MAVEN_CLI_OPTS install docker:build docker:push"
   artifacts:
     paths:

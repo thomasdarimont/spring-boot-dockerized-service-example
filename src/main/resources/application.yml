@@ -5,3 +5,31 @@ spring:
   jackson:
     serialization:
       write_dates_as_timestamps: false
+
+demo:
+  greeting: Hello (Default)
+
+---
+spring.profiles: dev
+spring.profiles.include:
+  - inmemory
+
+demo:
+  greeting: Hello (Dev)
+
+---
+spring.profiles: test
+spring.profiles.include:
+  - testdb
+
+demo:
+  greeting: Hello (test)
+
+---
+spring.profiles: prod
+spring.profiles.include:
+  - proddb
+
+demo:
+  greeting: Hello (Prod)
+  ha: true

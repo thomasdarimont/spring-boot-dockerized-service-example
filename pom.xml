@@ -25,6 +25,7 @@
 
         <docker-debug>false</docker-debug>
         <docker-maven-plugin.version>0.23.0</docker-maven-plugin.version>
+        <maven-scm-plugin.version>1.9.5</maven-scm-plugin.version>
 
         <!-- Sane default when no revision property is passed in from the commandline -->
         <revision>0-SNAPSHOT</revision>
@@ -165,7 +166,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.9.5</version>
+                <version>${maven-scm-plugin.version}</version>
                 <configuration>
                     <tag>${project.artifactId}-${project.version}</tag>
                 </configuration>

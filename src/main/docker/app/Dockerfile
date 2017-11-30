@@ -46,18 +46,18 @@ RUN         mkdir -p /app
 
 ADD         entry-point.sh maven/*.jar /app/
 
-USER root
+# USER root
 
-RUN         apk -U add tzdata \
-            && cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
-            && chmod +x /app/entry-point.sh
+#RUN         apk -U add tzdata \
+#            && cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+#            && chmod +x /app/entry-point.sh
 
-RUN         addgroup -S appgrp -g 1000 \
-            && adduser -S -g appgrp app \
-            && chown -R app /app \
-            && chmod -R "g+rwX" /app \
-            && chown -R app:appgrp /app
+#RUN         addgroup -S appgrp -g 1000 \
+#            && adduser -S -g appgrp app \
+#            && chown -R app /app \
+#            && chmod -R "g+rwX" /app \
+#            && chown -R app:appgrp /app
 
-USER app
+#USER app
 
 CMD         ["sh","/app/entry-point.sh"]

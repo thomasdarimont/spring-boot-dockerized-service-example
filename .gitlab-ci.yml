@@ -15,6 +15,7 @@ variables:
 
   DOCKER_DRIVER: overlay
 #  DOCKER_REGISTRY: "gitlab:5000"
+  INTERNAL_DOCKER_REGISTRY: "gitlab:5000"
   DOCKER_IMAGE: "demo-service"
   CONTAINER_NAME: "demo-service"
 
@@ -53,7 +54,7 @@ deploy:test:
   script:
     - echo "Deploy to TEST environment"
     - ssh vagrant@test "docker stop $CONTAINER_NAME || true && docker rm  $CONTAINER_NAME || true"
-    - ssh vagrant@test docker run -d --rm --name $CONTAINER_NAME -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 $DOCKER_REGISTRY/$CONTAINER_NAME:$CI_COMMIT_SHA
+    - ssh vagrant@test docker run -d --rm --name $CONTAINER_NAME -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 $INTERNAL_DOCKER_REGISTRY/$CONTAINER_NAME:$CI_COMMIT_SHA
   environment:
     name: test
     url: http://test:8080/

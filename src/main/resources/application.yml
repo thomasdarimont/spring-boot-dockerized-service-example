@@ -7,7 +7,7 @@ spring:
       write_dates_as_timestamps: false
 
 demo:
-  greeting: Hello (Default)
+  greeting: Hi (Default)
 
 ---
 spring.profiles: dev

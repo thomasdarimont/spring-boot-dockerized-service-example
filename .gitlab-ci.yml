@@ -26,8 +26,7 @@ stages:
 
 build:maven:
   stage: build
-  tags:
-    - maven
+  image: maven:3-jdk-8
   script:
     - echo "Running maven build"
     - "mvn $MAVEN_CLI_OPTS clean package docker:build docker:push"
@@ -37,15 +36,13 @@ build:maven:
 
 test:perf:
   stage: test
-  tags:
-    - maven
+  image: maven:3-jdk-8
   script:
     - echo "Running perf tests"
 
 deploy:test:
   stage: deploy
-  tags:
-    - maven
+  image: maven:3-jdk-8
   before_script:
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)
@@ -78,8 +75,7 @@ deploy:test:
 
 deploy:prod:
   stage: deploy
-  tags:
-    - maven
+  image: maven:3-jdk-8
   before_script:
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)known_hosts

@@ -23,7 +23,7 @@ spring.profiles.include:
   - testdb
 
 demo:
-  greeting: Hello (test)
+  greeting: Hello (test) New Feature
 
 ---
 spring.profiles: prod
@@ -31,5 +31,5 @@ spring.profiles.include:
   - proddb
 
 demo:
-  greeting: Hello (Prod)
+  greeting: Hello (Prod) New Feature
   ha: true

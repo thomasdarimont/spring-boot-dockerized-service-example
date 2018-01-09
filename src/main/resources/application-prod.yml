@@ -1,0 +1,6 @@
+spring.profiles.include:
+  - proddb
+
+myapp:
+  greeting: Hello
+  ha: true

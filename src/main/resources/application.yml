@@ -1,4 +1,3 @@
----
 spring:
   application:
     name: demo-service
@@ -13,31 +12,5 @@ management:
     git:
      mode: full
 
-demo:
-  greeting: Hi (Default)
-
-
----
-spring.profiles: dev
-spring.profiles.include:
-  - inmemory
-
-demo:
-  greeting: Hello (Dev)
-
----
-spring.profiles: test
-spring.profiles.include:
-  - testdb
-
-demo:
-  greeting: Hello (test) New Feature
-
----
-spring.profiles: prod
-spring.profiles.include:
-  - proddb
-
-demo:
-  greeting: Hello (Prod) New Feature
-  ha: true
+myapp:
+  greeting: Hello

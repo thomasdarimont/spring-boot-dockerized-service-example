@@ -19,7 +19,6 @@ variables:
   DOCKER_IMAGE: "demo-service"
   CONTAINER_NAME: "demo-service"
 
-
 stages:
   - build
   - test
@@ -27,15 +26,26 @@ stages:
 
 build:maven:
   stage: build
-  image: maven:3-jdk-8
-  script: "mvn $MAVEN_CLI_OPTS clean package -DskipTests docker:build docker:push"
+  tags:
+    - maven
+  script:
+    - echo "Running maven build"
+    - "mvn $MAVEN_CLI_OPTS clean package docker:build docker:push"
   artifacts:
     paths:
       - target/*.jar
 
+test:perf:
+  stage: test
+  tags:
+    - maven
+  script:
+    - echo "Running perf tests"
+
 deploy:test:
   stage: deploy
-  image: maven:3-jdk-8
+  tags:
+    - maven
   before_script:
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)
@@ -62,12 +72,14 @@ deploy:test:
     url: http://test:8080/
   dependencies:
   - build:maven
+  - test:perf
   only:
   - master
 
 deploy:prod:
   stage: deploy
-  image: maven:3-jdk-8
+  tags:
+    - maven
   before_script:
     # Install ssh-agent if not already installed, it is required by Docker.
     # (change apt-get to yum if you use a CentOS-based image)known_hosts
@@ -94,6 +106,7 @@ deploy:prod:
     url: http://prod:8080/
   dependencies:
   - build:maven
+  - test:perf
   when: manual
   only:
   - master

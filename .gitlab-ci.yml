@@ -53,7 +53,7 @@ deploy:test:
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   script:
     - echo "Deploy to TEST environment"
-    - ssh -vvvv vagrant@test "docker stop $CONTAINER_NAME || true"
+    - ssh vagrant@test "docker stop $CONTAINER_NAME || true"
     - ssh vagrant@test "docker rm $CONTAINER_NAME || true"
     - ssh vagrant@test docker run -d --rm --name $CONTAINER_NAME -e SPRING_PROFILES_ACTIVE=test -p 8080:8080 $INTERNAL_DOCKER_REGISTRY/$CONTAINER_NAME:$CI_COMMIT_SHA
   environment:
@@ -85,7 +85,7 @@ deploy:prod:
     - '[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   script:
     - echo "Deploy to PROD environment"
-    - ssh -vvvv vagrant@prod "docker stop $CONTAINER_NAME || true"
+    - ssh vagrant@prod "docker stop $CONTAINER_NAME || true"
     - ssh vagrant@prod "docker rm $CONTAINER_NAME || true"
     - ssh vagrant@prod docker run -d --rm --name $CONTAINER_NAME -e SPRING_PROFILES_ACTIVE=prod -p 8080:8080 $INTERNAL_DOCKER_REGISTRY/$DOCKER_IMAGE:$CI_COMMIT_SHA
   environment:

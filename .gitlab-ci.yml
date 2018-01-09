@@ -89,7 +89,7 @@ deploy:prod:
     - ssh vagrant@prod "docker rm $CONTAINER_NAME || true"
     - ssh vagrant@prod docker run -d --rm --name $CONTAINER_NAME -e SPRING_PROFILES_ACTIVE=prod -p 8080:8080 $INTERNAL_DOCKER_REGISTRY/$DOCKER_IMAGE:$CI_COMMIT_SHA
   environment:
-    name: test
+    name: prod
     url: http://prod:8080/
   dependencies:
   - build:maven

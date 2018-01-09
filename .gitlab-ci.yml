@@ -22,12 +22,13 @@ variables:
 
 stages:
   - build
+  - test
   - deploy
 
 build:maven:
   stage: build
   image: maven:3-jdk-8
-  script: "mvn $MAVEN_CLI_OPTS install docker:build docker:push"
+  script: "mvn $MAVEN_CLI_OPTS clean package -DskipTests docker:build docker:push"
   artifacts:
     paths:
       - target/*.jar

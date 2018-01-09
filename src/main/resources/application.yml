@@ -9,7 +9,9 @@ spring:
 management:
   add-application-context-header: false
   context-path: /application
-
+  info:
+    git:
+     mode: full
 
 demo:
   greeting: Hi (Default)

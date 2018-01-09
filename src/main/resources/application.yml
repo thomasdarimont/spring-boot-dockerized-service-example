@@ -6,8 +6,14 @@ spring:
     serialization:
       write_dates_as_timestamps: false
 
+management:
+  add-application-context-header: false
+  context-path: /application
+
+
 demo:
   greeting: Hi (Default)
+
 
 ---
 spring.profiles: dev

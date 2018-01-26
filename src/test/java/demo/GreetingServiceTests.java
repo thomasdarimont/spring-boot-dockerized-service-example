@@ -22,6 +22,6 @@ public class GreetingServiceTests {
 
         String greeting = greetingService.greet("Tom");
 
-        assertThat(greeting).isEqualTo("Hello Tom");
+        assertThat(greeting).isEqualTo("Huhu Tom");
     }
 }

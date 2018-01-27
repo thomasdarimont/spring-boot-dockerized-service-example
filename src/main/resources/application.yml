@@ -13,4 +13,4 @@ management:
      mode: full
 
 myapp:
-  greeting: Huhu
+  greeting: Hallo

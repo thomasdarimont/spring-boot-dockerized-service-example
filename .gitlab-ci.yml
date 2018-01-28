@@ -33,6 +33,7 @@ build:maven:
   artifacts:
     paths:
       - target/*.jar
+      - target/coverage-reports/
 
 test:perf:
   stage: test

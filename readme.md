@@ -1,3 +1,8 @@
+# Project Overview
+
+[![pipeline status](http://gitlab/tdlabs/spring-boot-dockerized-service-example/badges/master/pipeline.svg)](http://gitlab/tdlabs/spring-boot-dockerized-service-example/commits/master)
+[![coverage report](http://gitlab/tdlabs/spring-boot-dockerized-service-example/badges/master/coverage.svg)](http://gitlab/tdlabs/spring-boot-dockerized-service-example/commits/master)
+
 # Build docker image
 ```
 mvn clean package -DskipTests docker:build

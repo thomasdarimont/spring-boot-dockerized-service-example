@@ -29,7 +29,7 @@ build:maven:
   image: maven:3-jdk-8
   script:
     - echo "Running maven build"
-    - "mvn $MAVEN_CLI_OPTS clean package docker:build docker:push"
+    - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push"
     - mkdir public
     - mv target/site/jacoco-ut/ public/coverage
   artifacts:

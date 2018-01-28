@@ -33,7 +33,7 @@ build:maven:
   artifacts:
     paths:
       - target/*.jar
-      - target/coverage-reports/
+      - target/site/jacoco-ut/
 
 test:perf:
   stage: test

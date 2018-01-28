@@ -22,7 +22,6 @@ variables:
 stages:
   - build
   - test
-  - analyze
   - deploy
 
 build:maven:
@@ -30,7 +29,7 @@ build:maven:
   image: maven:3-jdk-8
   script:
     - echo "Running maven build"
-    - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push"
+    - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push sonar:sonar -Dsonar.host.url=http://gitlab:9000 -Dsonar.login=bbe49b82648f255379376aaf8e39425fd2a28a96"
 # Print coverage results to console
     - "cat target/site/jacoco-ut/index.html"
     - mkdir public
@@ -45,15 +44,6 @@ test:perf:
   image: maven:3-jdk-8
   script:
     - echo "Running perf tests"
-
-analyze:sonarqube:
-  stage: analyze
-  image: maven:3-jdk-8
-  script:
-    - mvn sonar:sonar -Dsonar.host.url=http://gitlab:9000 -Dsonar.login=bbe49b82648f255379376aaf8e39425fd2a28a96
-  dependencies:
-  - build:maven
-  - test:perf
 
 deploy:test:
   stage: deploy

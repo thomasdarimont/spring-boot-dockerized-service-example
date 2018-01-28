@@ -30,6 +30,8 @@ build:maven:
   script:
     - echo "Running maven build"
     - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push"
+# Print coverage results to console
+    - "cat target/site/jacoco-ut/index.html"
     - mkdir public
     - mv target/site/jacoco-ut/ public/coverage
   artifacts:

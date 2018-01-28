@@ -22,7 +22,6 @@ variables:
 stages:
   - build
   - test
-  - analyze
   - deploy
 
 build:maven:
@@ -31,30 +30,18 @@ build:maven:
   script:
     - echo "Running maven build"
     - "mvn $MAVEN_CLI_OPTS clean package docker:build docker:push"
+    - mkdir public
+    - mv target/site/jacoco-ut/ public/coverage
   artifacts:
     paths:
       - target/*.jar
-      - target/site/jacoco-ut/
+      - public
 
 test:perf:
   stage: test
   image: maven:3-jdk-8
   script:
     - echo "Running perf tests"
-
-analyze:coverage:
-  stage: analyze
-  image: maven:3-jdk-8
-  dependencies:
-    - build:maven
-  script:
-    - mv target/site/jacoco-ut/ public/coverage
-  artifacts:
-    paths:
-      - public
-#    expire_in: 30 days
-  only:
-    - master
 
 deploy:test:
   stage: deploy

@@ -29,7 +29,8 @@ build:maven:
   image: maven:3-jdk-8
   script:
     - echo "Running maven build"
-    - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push sonar:sonar -Dsonar.host.url=http://gitlab:9000 -Dsonar.login=bbe49b82648f255379376aaf8e39425fd2a28a96"
+# sonar:sonar -Dsonar.host.url=http://gitlab:9000 -Dsonar.login=bbe49b82648f255379376aaf8e39425fd2a28a96
+    - "mvn $MAVEN_CLI_OPTS clean install docker:build docker:push"
 # Print coverage results to console
     - "cat target/site/jacoco-ut/index.html"
     - mkdir public

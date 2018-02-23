@@ -65,4 +65,8 @@ RUN          adduser --system \
 
 USER app
 
+HEALTHCHECK --start-period=10s \
+            --interval=10s \
+            CMD curl --fail http://localhost:8080/application/health || exit 1
+
 CMD         ["sh","/app/entry-point.sh"]
